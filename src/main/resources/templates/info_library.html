@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+    <title>도서관</title>
+    <link rel="icon" th:href="@{/photo/GaBeanLogo.png}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300&display=swap" rel="stylesheet">
+</head>
+<div class="header" style="margin-bottom: 5px;">
+    <div class="logo-and-menu">
+        <a th:href="@{/}">
+            <div class="logo">
+                <img th:src="@{/photo/GaBean.png}" alt="Your Logo">
+            </div>
+        </a>
+        <div id="menu">
+            <ul>
+                <li>
+                    <a th:href="@{/info_gabean}">GaBean이란?</a>
+                </li>
+                <li>
+                    <a th:href="@{/campusmap}">캠퍼스맵</a>
+                    <ul>
+                        <li><a th:href="@{/campusmap}">캠퍼스맵</a></li>
+                        <li><a th:href="@{/campusmap_detail}">상세 정보</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/humun_food}">후문</a>
+                    <ul>
+                        <li><a th:href="@{/humun_food}">음식점</a></li>
+                        <li><a th:href="@{/humun_random}">오늘 뭐 먹지?</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/info_sugang}">학교 정보</a>
+                    <ul>
+                        <li><a th:href="@{/info_sugang}">수강 정보</a></li>
+                        <li><a th:href="@{/info_graduate}">졸업 정보</a></li>
+                        <li><a th:href="@{/info_library}">도서관</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/info_bus}">교통</a>
+                    <ul>
+                        <li><a th:href="@{/info_bus}">버스</a></li>
+                        <li><a th:href="@{/info_subway}">지하철</a></li>
+                        <li><a th:href="@{/info_shuttle}">셔틀버스</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/sound_kong}">콩들의 소리</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<button class="fixed-button" id="openSlider"></button>
+
+<!-- 슬라이드인 메뉴 -->
+<div class="slider-menu">
+    <div class="slider-content">
+        ID : 학번 / PW : SU-WINGs PW
+        <br>(즉, SU-WINGs 로그인과 방식이 같다)
+    </div>
+</div>
+<script th:inline="javascript">
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var fixedButton = document.querySelector('.fixed-button');
+
+        window.addEventListener('scroll', function() {
+            var scrollY = window.scrollY;
+            if (scrollY > 200) {
+               fixedButton.style.top = '100px';
+            } else {
+                fixedButton.style.top = '100px';
+            }
+        });
+
+        fixedButton.style.top = '100px';
+        fixedButton.style.right = '0px';
+    });
+
+    var imageButton = document.getElementById('openSlider');
+
+    imageButton.addEventListener('click', function() {
+        imageButton.classList.toggle('clicked');
+    });
+</script>
+<script th:inline="javascript">
+    var openSliderButton = document.getElementById('openSlider');
+    var sliderMenu = document.querySelector('.slider-menu');
+
+    sliderMenu.style.top = '100px';
+
+    openSliderButton.addEventListener('click', function() {
+        if (sliderMenu.style.right === '-350px' || sliderMenu.style.right === '') {
+            sliderMenu.style.right = '60px';
+        } else {
+            sliderMenu.style.right = '-350px';
+        }
+    });
+</script>
+<div class="news-button-container">
+    <button id="newsButton" class="newsButton">SYU<br>뉴스</button>
+</div>
+<script th:inline="javascript">
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var newsButton = document.getElementById('newsButton');
+
+        newsButton.style.top = '170px';
+        newsButton.style.right = '0px';
+
+        newsButton.addEventListener('click', function() {
+            window.location.href = /*[[@{/GaBean/news}]]*/ '';
+        });
+    });
+</script>
+<div class="page-title-img">
+</div>
+<div class="main-container">
+    <div class="list-container">
+        <div class="list-title">
+            <h1><a th:href="@{/info_library}">도서관</a></h1>
+        </div>
+        <h3>목록</h3>
+        <ul>
+            <li><a th:href="@{/info_sugang}">수강 정보</a></li>
+            <li><a th:href="@{/info_graduate}">졸업 정보</a></li>
+            <li><a th:href="@{/info_library}">도서관</a></li>
+        </ul>
+    </div>
+    <div class="content-container">
+        <div class="main-container">
+            <div class="info-bus">
+                <div class="direction">
+                    <style>
+                        table, th, td {
+                          text-align: center;
+                        }
+                    </style>
+                    <h1 style="text-decoration: skyblue wavy underline; font-family: 'Noto Sans KR', sans-serif; font-size: 25pt;">도서관 개관 시간 안내</h1>
+                    <br><br>
+                    <table>
+                        <caption style="font-size: 18pt; margin-bottom: 16px;">학기 중 개관시간 안내표</caption>
+                        <thead>
+                        <tr>
+                            <th scope="col" colspan="2">구 분</th>
+                            <th scope="col">월-목</th>
+                            <th scope="col">금</th>
+                            <th scope="col">일</th>
+                            <th scope="col">비고</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td rowspan="2" class="alignCenter" width="10%">지하<br>1층</td>
+                            <td class="alignCenter">나눔실</td>
+                            <td class="alignCenter">09:00-19:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter point2">휴관</td>
+                            <td class="alignCenter point1">세미나 중 <br>개인이용불가</td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">서고1,2,3,4</td>
+                            <td class="alignCenter">09:00-17:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter point2">휴관</td>
+                            <td class="alignCenter point2">폐가제 운영</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3" class="alignCenter" width="10%">1층</td>
+                            <td class="alignCenter">대출/반납</td>
+                            <td class="alignCenter">09:00-19:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">열람실</td>
+                            <td class="alignCenter">08:00-23:00</td>
+                            <td class="alignCenter">08:00-17:00</td>
+                            <td class="alignCenter">09:00-22:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">휴게실</td>
+                            <td class="alignCenter">08:00-23:00</td>
+                            <td class="alignCenter">08:00-17:00</td>
+                            <td class="alignCenter">09:00-22:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="alignCenter" width="10%">2층</td>
+                            <td class="alignCenter">제1자료실</td>
+                            <td class="alignCenter">09:00-19:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">채움실</td>
+                            <td class="alignCenter">09:00-19:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">대출불가<br><span class="point2">타실로 이동 불가</span></td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">2.5층</td>
+                            <td class="alignCenter">열린공간</td>
+                            <td class="alignCenter">09:00-19:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3" class="alignCenter" width="10%">3층</td>
+                            <td class="alignCenter">제2자료실</td>
+                            <td class="alignCenter">09:00-19:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">토론실</td>
+                            <td class="alignCenter">09:00-19:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">집중실</td>
+                            <td class="alignCenter">09:00-19:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">2-3층</td>
+                            <td class="alignCenter">스터디룸</td>
+                            <td class="alignCenter">09:00-17:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter point2">휴관</td>
+                            <td class="alignCenter">사전예약</td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" class="point2">
+                                <p>*법정 공휴일, 토요일은 폐관합니다.</p>
+                                <p>*스터디룸 이용 시 이용규정을 꼭 확인하시기 바랍니다.</p>
+                                <p>*개관일정은 학술정보원 일정에 따라 변경될 수 있으니 공지사항을 확인하시기 바랍니다.</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br><br>
+                    <table>
+                        <caption style="font-size: 18pt; margin-bottom: 16px;">방학 중 개관시간 안내표</caption>
+                        <thead>
+                        <tr>
+                            <th scope="col" colspan="2">구 분</th>
+                            <th scope="col">월-목</th>
+                            <th scope="col">금</th>
+                            <th scope="col">일</th>
+                            <th scope="col">비고</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td rowspan="2" class="alignCenter" width="10%">지하<br>1층</td>
+                            <td class="alignCenter">나눔실</td>
+                            <td class="alignCenter">09:00-17:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter point2">휴관</td>
+                            <td class="alignCenter point1">세미나 중<br>개인이용불가</td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">서고1,2,3,4</td>
+                            <td class="alignCenter">09:00-17:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter point2">휴관</td>
+                            <td class="alignCenter point2">폐가제 운영</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3" class="alignCenter" width="10%">1층</td>
+                            <td class="alignCenter">대출/반납</td>
+                            <td class="alignCenter">09:00-17:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">열람실</td>
+                            <td class="alignCenter">09:00-21:00</td>
+                            <td class="alignCenter">09:00-17:00</td>
+                            <td class="alignCenter">09:00-17:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">휴게실</td>
+                            <td class="alignCenter">09:00-21:00</td>
+                            <td class="alignCenter">09:00-17:00</td>
+                            <td class="alignCenter">09:00-17:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="alignCenter" width="10%">2층</td>
+                            <td class="alignCenter">제1자료실</td>
+                            <td class="alignCenter">09:00-17:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">채움실</td>
+                            <td class="alignCenter">09:00-17:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">대출불가<br><span class="point2">타실로 이동 불가</span></td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">2.5층</td>
+                            <td class="alignCenter">열린공간</td>
+                            <td class="alignCenter">09:00-19:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3" class="alignCenter" width="10%">3층</td>
+                            <td class="alignCenter">제2자료실</td>
+                            <td class="alignCenter">09:00-17:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">토론실</td>
+                            <td class="alignCenter">09:00-17:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">집중실</td>
+                            <td class="alignCenter">09:00-17:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter"></td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter">2-3층</td>
+                            <td class="alignCenter">스터디룸</td>
+                            <td class="alignCenter">09:00-17:00</td>
+                            <td class="alignCenter">09:00-15:00</td>
+                            <td class="alignCenter point2">휴관</td>
+                            <td class="alignCenter">사전예약</td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" class="point2">
+                                <p>*법정 공휴일, 토요일은 폐관합니다.</p>
+                                <p>*스터디룸 이용 시 이용규정을 꼭 확인하시기 바랍니다.</p>
+                                <p>*개관일정은 학술정보원 일정에 따라 변경될 수 있으니 공지사항을 확인하시기 바랍니다.</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <a href="https://www.kogl.or.kr/info/license.do" target="_blank"><img th:src="@{/photo/copyright.jpeg}" alt="CopyRight" style="float: right; width: 5%;"></a>
+    <a href="https://ccl.cckorea.org/about/" target="_blank"><img th:src="@{/photo/copyright2.png}" alt="CopyRight2" style="float: right; width: 5%;"></a>
+    <p style="margin-left: 20px;">Copyright © 2023 양이찬 All rights reserved.
+        <br>Dev : Ee Chan Yang
+        <br>Logo : Jun Seong Park
+        <br>Other Website Dev : Sang Yoon Kim</p>
+    <a href="https://www.flaticon.com/kr/free-icons/" title="맑은 아이콘" style="float: right; margin-right: 10px; color: white; font-size: 8pt;">맑은 아이콘  제작자: Freepik - Flaticon</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+    <title>수강 정보</title>
+    <link rel="icon" th:href="@{/photo/GaBeanLogo.png}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300&display=swap" rel="stylesheet">
+</head>
+<div class="header" style="margin-bottom: 5px;">
+    <div class="logo-and-menu">
+        <a th:href="@{/}">
+            <div class="logo">
+                <img th:src="@{/photo/GaBean.png}" alt="Your Logo">
+            </div>
+        </a>
+        <div id="menu">
+            <ul>
+                <li>
+                    <a th:href="@{/info_gabean}">GaBean이란?</a>
+                </li>
+                <li>
+                    <a th:href="@{/campusmap}">캠퍼스맵</a>
+                    <ul>
+                        <li><a th:href="@{/campusmap}">캠퍼스맵</a></li>
+                        <li><a th:href="@{/campusmap_detail}">상세 정보</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/humun_food}">후문</a>
+                    <ul>
+                        <li><a th:href="@{/humun_food}">음식점</a></li>
+                        <li><a th:href="@{/humun_random}">오늘 뭐 먹지?</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/info_sugang}">학교 정보</a>
+                    <ul>
+                        <li><a th:href="@{/info_sugang}">수강 정보</a></li>
+                        <li><a th:href="@{/info_graduate}">졸업 정보</a></li>
+                        <li><a th:href="@{/info_library}">도서관</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/info_bus}">교통</a>
+                    <ul>
+                        <li><a th:href="@{/info_bus}">버스</a></li>
+                        <li><a th:href="@{/info_subway}">지하철</a></li>
+                        <li><a th:href="@{/info_shuttle}">셔틀버스</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/sound_kong}">콩들의 소리</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<button class="fixed-button" id="openSlider"></button>
+
+<!-- 슬라이드인 메뉴 -->
+<div class="slider-menu">
+    <div class="slider-content">
+        ID : 학번 / PW : SU-WINGs PW
+        <br>(즉, SU-WINGs 로그인과 방식이 같다)
+    </div>
+</div>
+<script th:inline="javascript">
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var fixedButton = document.querySelector('.fixed-button');
+
+        window.addEventListener('scroll', function() {
+            var scrollY = window.scrollY;
+            if (scrollY > 200) {
+               fixedButton.style.top = '100px';
+            } else {
+                fixedButton.style.top = '100px';
+            }
+        });
+
+        fixedButton.style.top = '100px';
+        fixedButton.style.right = '0px';
+    });
+
+    var imageButton = document.getElementById('openSlider');
+
+    imageButton.addEventListener('click', function() {
+        imageButton.classList.toggle('clicked');
+    });
+</script>
+<script th:inline="javascript">
+    var openSliderButton = document.getElementById('openSlider');
+    var sliderMenu = document.querySelector('.slider-menu');
+
+    sliderMenu.style.top = '100px';
+
+    openSliderButton.addEventListener('click', function() {
+        if (sliderMenu.style.right === '-350px' || sliderMenu.style.right === '') {
+            sliderMenu.style.right = '60px';
+        } else {
+            sliderMenu.style.right = '-350px';
+        }
+    });
+</script>
+<div class="news-button-container">
+    <button id="newsButton" class="newsButton">SYU<br>뉴스</button>
+</div>
+<script th:inline="javascript">
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var newsButton = document.getElementById('newsButton');
+
+        newsButton.style.top = '170px';
+        newsButton.style.right = '0px';
+
+        newsButton.addEventListener('click', function() {
+            window.location.href = /*[[@{/GaBean/news}]]*/ '';
+        });
+    });
+</script>
+<div class="page-title-img">
+</div>
+<div class="main-container">
+    <div class="list-container">
+        <div class="list-title">
+            <h1><a th:href="@{/info_sugang}">수강 정보</a></h1>
+        </div>
+        <h3>목록</h3>
+        <ul>
+            <li><a th:href="@{/info_sugang}">수강 정보</a></li>
+            <li><a th:href="@{/info_graduate}">졸업 정보</a></li>
+            <li><a th:href="@{/info_library}">도서관</a></li>
+        </ul>
+    </div>
+    <div class="content-container">
+        <div class="main-container">
+            <div class="info-bus">
+                <div class="direction">
+                    <h1 style="text-decoration: skyblue wavy underline; font-family: 'Noto Sans KR', sans-serif; font-size: 22pt;">수강신청이란?</h1>
+                    <h4>매년 2월 및 8월에 실시하는 제도로, 수강신청 시 본인의 능력에 따라 원하는 수업을 들을 수 있다.</h4>
+                    <a>* 수강신청 사이트 : </a><a href="http://sugang.suwings.syu.ac.kr" style="color: black; text-decoration: black underline;" target="_blank">http://sugang.suwings.syu.ac.kr</a>&nbsp;<a>(SU-WINGs)</a><br>
+                    <a>* 수강신청 모의 사이트 : </a><a href="https://sugang.syu.kr/testLogin" style="color: black; text-decoration: black underline;" target="_blank">https://sugang.syu.kr/testLogin</a>&nbsp;<a>(해당 웹 개발자: 김상윤)</a>
+                </div>
+                <div class="direction">
+                    <h1 style="text-decoration: skyblue wavy underline; font-family: 'Noto Sans KR', sans-serif; font-size: 22pt;">예비 수강신청이란?</h1>
+                    <h4>매년 1월 및 7월에 실시하는 장바구니 제도로, 수강신청 시에 유리하도록 원하는 수업을 미리 장바구니에 담을 수 있다.<br>1학년 2학기부터 사용 가능하다.</h4>
+                    <a>* 예비 수강신청 사이트 : </a><a href="http://sugang.suwings.syu.ac.kr" style="color: black; text-decoration: black underline;" target="_blank">http://sugang.suwings.syu.ac.kr</a>&nbsp;<a>(SU-WINGs) - 수강신청 사이트와 동일</a><br>
+                    <a>* 수강신청 경쟁률 조회 사이트 : </a><a href="https://sugang.syu.kr/basket" style="color: black; text-decoration: black underline;" target="_blank">https://sugang.syu.kr/basket</a>&nbsp;<a>(해당 웹 개발자: 김상윤)</a>
+                </div>
+                <div class="direction">
+                    <h1 style="text-decoration: skyblue wavy underline; font-family: 'Noto Sans KR', sans-serif; font-size: 22pt;">자주 하는 질문</h1>
+                    <h3>Q. 학기당 최소 몇 학점을 들어야하나요?</h3>
+                    <a>A. 학기인정 최소학점은 </a><a style="color: black; text-decoration: black underline;">12학점</a><a>입니다!</a>
+                    <h3>Q. 학기당 최대 들을 수 있는 학점은 몇 학점인가요?</h3>
+                    <a>A. 수강과목 중 <a style="color: black; text-decoration: black underline;">선택과목에 1학점이 없는 경우 18학점까지</a><a> 가능하며,</a><br>&nbsp;&nbsp;&nbsp;<a style="color: black; text-decoration: black underline;">평균평점이 3.7이상</a><a>인 학생은 </a><a style="color: black; text-decoration: black underline;">21학점까지</a> 가능합니다!</a>
+                    <h3>Q. 수강신청 확인 및 정정기간은 언제인가요?</h3>
+                    <a>A. </a><a style="color: black; text-decoration: black underline;">매학기 개강 첫주</a><a>입니다!</a>
+                    <h3>Q. 수강신청 폐강의 기준은 어떻게 되나요?</h3>
+                    <a>A. 수강인원이</a> <a style="color: black; text-decoration: black underline;">전공 8명, 교양 16명 미만</a><a>일 경우 폐강됩니다!</a><br>
+                    <a>* 수강신청 폐강위기 조회 사이트 : </a><a href="https://sugang.syu.kr/closed" style="color: black; text-decoration: black underline;" target="_blank">https://sugang.syu.kr/closed</a>&nbsp;<a>(해당 웹 개발자: 김상윤)</a>
+                    <h3>Q. 재수강 시 받을 수 있는 최대 성적은 어떻게 되나요?</h3>
+                    <a>A. </a><a style="color: black; text-decoration: black underline;">B+</a><a>입니다!</a>
+                    <br><br><br>
+                    <a style="float: right; font-size:10pt;">에 제보 바랍니다.</a><a style="color: black; text-decoration: black underline; float: right; font-size:11pt;">콩들의 소리</a><a style="float: right; font-size:10pt;">모든 정보는 23년도 기준이며 추가로 제보할 내용이 있으면&nbsp;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <a href="https://www.kogl.or.kr/info/license.do" target="_blank"><img th:src="@{/photo/copyright.jpeg}" alt="CopyRight" style="float: right; width: 5%;"></a>
+    <a href="https://ccl.cckorea.org/about/" target="_blank"><img th:src="@{/photo/copyright2.png}" alt="CopyRight2" style="float: right; width: 5%;"></a>
+    <p style="margin-left: 20px;">Copyright © 2023 양이찬 All rights reserved.
+        <br>Dev : Ee Chan Yang
+        <br>Logo : Jun Seong Park
+        <br>Other Website Dev : Sang Yoon Kim</p>
+    <a href="https://www.flaticon.com/kr/free-icons/" title="맑은 아이콘" style="float: right; margin-right: 10px; color: white; font-size: 8pt;">맑은 아이콘  제작자: Freepik - Flaticon</a>
+</div>
+</body>
+</html>
