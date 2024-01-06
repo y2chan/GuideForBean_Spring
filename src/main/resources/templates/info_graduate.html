@@ -35,7 +35,7 @@
                         <li><a th:href="@{/humun_random}">오늘 뭐 먹지?</a></li>
                     </ul>
                 </li>
-                <li>
+                <li style="background-color: skyblue; color: #FFF;">
                     <a th:href="@{/info_sugang}">학교 정보</a>
                     <ul>
                         <li><a th:href="@{/info_sugang}">수강 정보</a></li>
@@ -115,7 +115,7 @@
         newsButton.style.right = '0px';
 
         newsButton.addEventListener('click', function() {
-            window.location.href = /*[[@{/GaBean/news}]]*/ '';
+            window.location.href = /*[[@{/news}]]*/ '';
         });
     });
 </script>

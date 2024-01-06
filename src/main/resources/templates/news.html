@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+    <title>SYU 뉴스</title>
+    <link rel="icon" th:href="@{/photo/GaBeanLogo.png}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("h4").each(function(){
+                var option = new Option($(this).text(), $(this).text());
+                $(option).html($(this).text());
+                $("#collegeSelect").append(option);
+            });
+
+            $("#collegeSelect").change(function(){
+                var selectedCollege = $(this).val();
+                $("li").hide(); // 모든 li 태그를 숨깁니다.
+                $("h4:contains('" + selectedCollege + "')").parent().show(); // 선택된 대학의 li 태그만 보여줍니다.
+            });
+        });
+    </script>
+</head>
+<div class="header" style="margin-bottom: 5px;">
+    <div class="logo-and-menu">
+        <a th:href="@{/}">
+            <div class="logo">
+                <img th:src="@{/photo/GaBean.png}" alt="Your Logo">
+            </div>
+        </a>
+        <div id="menu">
+            <ul>
+                <li>
+                    <a th:href="@{/info_gabean}">GaBean이란?</a>
+                </li>
+                <li>
+                    <a th:href="@{/campusmap}">캠퍼스맵</a>
+                    <ul>
+                        <li><a th:href="@{/campusmap}">캠퍼스맵</a></li>
+                        <li><a th:href="@{/campusmap_detail}">상세 정보</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/humun_food}">후문</a>
+                    <ul>
+                        <li><a th:href="@{/humun_food}">음식점</a></li>
+                        <li><a th:href="@{/humun_random}">오늘 뭐 먹지?</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/info_sugang}">학교 정보</a>
+                    <ul>
+                        <li><a th:href="@{/info_sugang}">수강 정보</a></li>
+                        <li><a th:href="@{/info_graduate}">졸업 정보</a></li>
+                        <li><a th:href="@{/info_library}">도서관</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/info_bus}">교통</a>
+                    <ul>
+                        <li><a th:href="@{/info_bus}">버스</a></li>
+                        <li><a th:href="@{/info_subway}">지하철</a></li>
+                        <li><a th:href="@{/info_shuttle}">셔틀버스</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/sound_kong}">콩들의 소리</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<button class="fixed-button" id="openSlider"></button>
+
+<!-- 슬라이드인 메뉴 -->
+<div class="slider-menu">
+    <div class="slider-content">
+        ID : 학번 / PW : SU-WINGs PW
+        <br>(즉, SU-WINGs 로그인과 방식이 같다)
+    </div>
+</div>
+<script th:inline="javascript">
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var fixedButton = document.querySelector('.fixed-button');
+
+        window.addEventListener('scroll', function() {
+            var scrollY = window.scrollY;
+            if (scrollY > 200) {
+               fixedButton.style.top = '100px';
+            } else {
+                fixedButton.style.top = '100px';
+            }
+        });
+
+        fixedButton.style.top = '100px';
+        fixedButton.style.right = '0px';
+    });
+
+    var imageButton = document.getElementById('openSlider');
+
+    imageButton.addEventListener('click', function() {
+        imageButton.classList.toggle('clicked');
+    });
+</script>
+<script th:inline="javascript">
+    var openSliderButton = document.getElementById('openSlider');
+    var sliderMenu = document.querySelector('.slider-menu');
+
+    sliderMenu.style.top = '100px';
+
+    openSliderButton.addEventListener('click', function() {
+        if (sliderMenu.style.right === '-350px' || sliderMenu.style.right === '') {
+            sliderMenu.style.right = '60px';
+        } else {
+            sliderMenu.style.right = '-350px';
+        }
+    });
+</script>
+<div class="news-button-container">
+    <button id="newsButton" class="newsButton">SYU<br>뉴스</button>
+</div>
+<script th:inline="javascript">
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var newsButton = document.getElementById('newsButton');
+
+        newsButton.style.top = '170px';
+        newsButton.style.right = '0px';
+
+        newsButton.addEventListener('click', function() {
+            window.location.href = /*[[@{/news}]]*/ '';
+        });
+    });
+</script>
+<div class="page-title-img">
+</div>
+<div class="main-container">
+    <div class="list-container">
+        <div class="list-title">
+            <h1><a th:href="@{/news}">SYU 뉴스</a></h1>
+        </div>
+    </div>
+    <div class="content-container">
+        <div class="main-container">
+            <div class="info-bus">
+                <div class="direction">
+
+                    <h1>Keyword<a style="font-size: 11pt; margin-left: 50px;">키워드 하나당 20개씩 최신 / 관련 순으로 정렬됩니다.</a></h1><br>
+
+
+                    <!-- 검색어 버튼 -->
+                    <h3>- 삼육대학교 이슈</h3>
+                    <ul>
+                        <li>
+                            <a th:href="@{'/news?query=' + '삼육대학교'}"><button class="filter-button" style="margin-top: 20px;">삼육대학교</button></a>
+                            <a th:href="@{'/news?query=' + '삼육대학교 신설'}"><button class="filter-button" style="margin-top: 20px;">삼육대학교 신설</button></a>
+                            <a th:href="@{'/news?query=' + '삼육대학교 수시등급'}"><button class="filter-button" style="margin-top: 20px;">삼육대학교 수시등급</button></a>
+                            <a th:href="@{'/news?query=' + '삼육대학교 정시등급'}"><button class="filter-button" style="margin-top: 20px;">삼육대학교 정시등급</button></a>
+                        </li>
+                    </ul>
+                    <br>
+                    <h3>- 단과별 실시간 이슈</h3>
+                    <select id="collegeSelect" style="margin-left: 3%">
+                        <option>단과를 선택하세요</option>
+                    </select>
+                    <ul>
+                        <li>
+                            <h4>📚 인문사회대학</h4>
+                            <a th:href="@{'/news?query=' + '영어영문학과'}"><button class="filter-button" style="margin-top: 20px;">영어영문학과</button></a>
+                            <a th:href="@{'/news?query=' + '중국어학과'}"><button class="filter-button" style="margin-top: 20px;">중국어학과</button></a>
+                            <a th:href="@{'/news?query=' + '일본어학과'}"><button class="filter-button" style="margin-top: 20px;">일본어학과</button></a>
+                            <a th:href="@{'/news?query=' + '경영학과'}"><button class="filter-button" style="margin-top: 20px;">경영학과</button></a>
+                            <a th:href="@{'/news?query=' + '경영정보학과'}"><button class="filter-button" style="margin-top: 20px;">경영정보학과</button></a>
+                            <a th:href="@{'/news?query=' + '유아교육과'}"><button class="filter-button" style="margin-top: 20px;">유아교육과</button></a>
+                            <a th:href="@{'/news?query=' + '글로벌한국학과'}"><button class="filter-button" style="margin-top: 20px;">글로벌한국학과</button></a>
+                            <a th:href="@{'/news?query=' + '항공관광외국어학부'}"><button class="filter-button" style="margin-top: 20px;">항공관광외국어학부</button></a>
+                            <!-- 여기에 다른 버튼들을 추가하세요 -->
+                        </li>
+                        <li>
+                            <h4>🚑 보건복지대학</h4>
+                            <a th:href="@{'/news?query=' + '물리치료학과'}"><button class="filter-button" style="margin-top: 20px;">물리치료학과</button></a>
+                            <a th:href="@{'/news?query=' + '식품영양학과'}"><button class="filter-button" style="margin-top: 20px;">식품영양학과</button></a>
+                            <a th:href="@{'/news?query=' + '사회복지학과'}"><button class="filter-button" style="margin-top: 20px;">사회복지학과</button></a>
+                            <a th:href="@{'/news?query=' + '보건관리학과'}"><button class="filter-button" style="margin-top: 20px;">보건관리학과</button></a>
+                            <a th:href="@{'/news?query=' + '상담심리학과'}"><button class="filter-button" style="margin-top: 20px;">상담심리학과</button></a>
+                            <a th:href="@{'/news?query=' + '생활체육학과'}"><button class="filter-button" style="margin-top: 20px;">생활체육학과</button></a>
+                            <!-- 여기에 다른 버튼들을 추가하세요 -->
+                        </li>
+                        <li>
+                            <h4>💻 미래융합대학</h4>
+                            <a th:href="@{'/news?query=' + '컴퓨터공학부'}"><button class="filter-button" style="margin-top: 20px;">컴퓨터공학부</button></a>
+                            <a th:href="@{'/news?query=' + 'IT융합공학과'}"><button class="filter-button" style="margin-top: 20px;">IT융합공학과</button></a>
+                            <a th:href="@{'/news?query=' + '인공지능융합학부'}"><button class="filter-button" style="margin-top: 20px;">인공지능융합학부</button></a>
+                            <!-- 여기에 다른 버튼들을 추가하세요 -->
+                        </li>
+                        <li>
+                            <h4>🔬 과학기술대학</h4>
+                            <a th:href="@{'/news?query=' + '화학생명과학과'}"><button class="filter-button" style="margin-top: 20px;">화학생명과학과</button></a>
+                            <a th:href="@{'/news?query=' + '환경디자인원예학과'}"><button class="filter-button" style="margin-top: 20px;">환경디자인원예학과</button></a>
+                            <a th:href="@{'/news?query=' + '동물자원과학과'}"><button class="filter-button" style="margin-top: 20px;">동물자원과학과</button></a>
+                            <a th:href="@{'/news?query=' + '바이오융합공학과'}"><button class="filter-button" style="margin-top: 20px;">바이오융합공학과</button></a>
+                            <!-- 추가 검색어를 넣고 싶다면 위와 같은 형식으로 더 추가하면 됩니다. -->
+                        </li>
+                        <li>
+                            <h4>💊 약학/간호대학</h4>
+                            <a th:href="@{'/news?query=' + '약학과'}"><button class="filter-button" style="margin-top: 20px;">약학과</button></a>
+                            <a th:href="@{'/news?query=' + '간호학과'}"><button class="filter-button" style="margin-top: 20px;">간호학과</button></a>
+                            <!-- 추가 검색어를 넣고 싶다면 위와 같은 형식으로 더 추가하면 됩니다. -->
+                        </li>
+                        <li>
+                            <h4>🎨 문화예술대학</h4>
+                            <a th:href="@{'/news?query=' + '건축학과'}"><button class="filter-button" style="margin-top: 20px;">건축학과</button></a>
+                            <a th:href="@{'/news?query=' + '음악학과'}"><button class="filter-button" style="margin-top: 20px;">음악학과</button></a>
+                            <a th:href="@{'/news?query=' + '아트앤디자인학과'}"><button class="filter-button" style="margin-top: 20px;">아트앤디자인학과</button></a>
+                            <!-- 추가 검색어를 넣고 싶다면 위와 같은 형식으로 더 추가하면 됩니다. -->
+                        </li>
+                    </ul>
+                    <br><br>
+                    <hr>
+                    <h1>Result</h1>
+                    <h2 th:if="${query != null}" th:text="'검색어: ' + ${query}"></h2>
+
+                    <ul th:if="${news != null}">
+                        <li th:each="item : ${news}">
+                            <a th:href="${item.link}" target="_blank"><h3><span>◼ </span><span th:utext="${item.title}"></span></h3></a>
+                            <p><span>📆 </span><span th:text="${item.pubDate}"></span></p>
+                            <p><span>▪ </span><span th:utext="${item.description}"></span></p>
+                        </li>
+                    </ul>
+
+                    <h2 th:if="${#lists.isEmpty(news)}">검색어를 클릭하세요</h2>
+                    <a style="float: right; font-size:10pt;">모든 내용은 네이버 뉴스에서 최신 / 관련순으로 가져왔습니다.</a><br>
+                    <a th:href="'https://news.naver.com/'" style="color: black; text-decoration: black underline; float: right; font-size:11pt;" target="_blank">네이버 뉴스</a><a style="float: right; font-size:10pt;">출처:&nbsp;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <a href="https://www.kogl.or.kr/info/license.do" target="_blank"><img th:src="@{/photo/copyright.jpeg}" alt="CopyRight" style="float: right; width: 5%;"></a>
+    <a href="https://ccl.cckorea.org/about/" target="_blank"><img th:src="@{/photo/copyright2.png}" alt="CopyRight2" style="float: right; width: 5%;"></a>
+    <p style="margin-left: 20px;">Copyright © 2023 양이찬 All rights reserved.
+        <br>Dev : Ee Chan Yang
+        <br>Logo : Jun Seong Park
+        <br>Other Website Dev : Sang Yoon Kim</p>
+    <a href="https://www.flaticon.com/kr/free-icons/" title="맑은 아이콘" style="float: right; margin-right: 10px; color: white; font-size: 8pt;">맑은 아이콘  제작자: Freepik - Flaticon</a>
+</div>
+</body>
+</html>
