@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+    <title>오늘 뭐 먹지?</title>
+    <link rel="icon" th:href="@{/photo/GaBeanLogo.png}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300&display=swap" rel="stylesheet">
+</head>
+<div class="header" style="margin-bottom: 5px;">
+    <div class="logo-and-menu">
+        <a th:href="@{/}">
+            <div class="logo">
+                <img th:src="@{/photo/GaBean.png}" alt="Your Logo">
+            </div>
+        </a>
+        <div id="menu">
+            <ul>
+                <li>
+                    <a th:href="@{/info_gabean}">GaBean이란?</a>
+                </li>
+                <li>
+                    <a th:href="@{/campusmap}">캠퍼스맵</a>
+                    <ul>
+                        <li><a th:href="@{/campusmap}">캠퍼스맵</a></li>
+                        <li><a th:href="@{/campusmap_detail}">상세 정보</a></li>
+                    </ul>
+                </li>
+                <li style="background-color: skyblue; color: #FFF;">
+                    <a th:href="@{/humun_food}">후문</a>
+                    <ul>
+                        <li><a th:href="@{/humun_food}">음식점</a></li>
+                        <li><a th:href="@{/humun_random}">오늘 뭐 먹지?</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/info_sugang}">학교 정보</a>
+                    <ul>
+                        <li><a th:href="@{/info_sugang}">수강 정보</a></li>
+                        <li><a th:href="@{/info_graduate}">졸업 정보</a></li>
+                        <li><a th:href="@{/info_library}">도서관</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/info_bus}">교통</a>
+                    <ul>
+                        <li><a th:href="@{/info_bus}">버스</a></li>
+                        <li><a th:href="@{/info_subway}">지하철</a></li>
+                        <li><a th:href="@{/info_shuttle}">셔틀버스</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/sound_kong}">콩들의 소리</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<button class="fixed-button" id="openSlider"></button>
+
+<!-- 슬라이드인 메뉴 -->
+<div class="slider-menu">
+    <div class="slider-content">
+        ID : 학번 / PW : SU-WINGs PW
+        <br>(즉, SU-WINGs 로그인과 방식이 같다)
+    </div>
+</div>
+<script th:inline="javascript">
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var fixedButton = document.querySelector('.fixed-button');
+
+        window.addEventListener('scroll', function() {
+            var scrollY = window.scrollY;
+            if (scrollY > 200) {
+               fixedButton.style.top = '100px';
+            } else {
+                fixedButton.style.top = '100px';
+            }
+        });
+
+        fixedButton.style.top = '100px';
+        fixedButton.style.right = '0px';
+    });
+
+    var imageButton = document.getElementById('openSlider');
+
+    imageButton.addEventListener('click', function() {
+        imageButton.classList.toggle('clicked');
+    });
+</script>
+<script th:inline="javascript">
+    var openSliderButton = document.getElementById('openSlider');
+    var sliderMenu = document.querySelector('.slider-menu');
+
+    sliderMenu.style.top = '100px';
+
+    openSliderButton.addEventListener('click', function() {
+        if (sliderMenu.style.right === '-350px' || sliderMenu.style.right === '') {
+            sliderMenu.style.right = '60px';
+        } else {
+            sliderMenu.style.right = '-350px';
+        }
+    });
+</script>
+<div class="news-button-container">
+    <button id="newsButton" class="newsButton">SYU<br>뉴스</button>
+</div>
+<script th:inline="javascript">
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var newsButton = document.getElementById('newsButton');
+
+        newsButton.style.top = '170px';
+        newsButton.style.right = '0px';
+
+        newsButton.addEventListener('click', function() {
+            window.location.href = /*[[@{/news}]]*/ '';
+        });
+    });
+</script>
+<div class="page-title-img">
+</div>
+<div class="main-container">
+    <div class="list-container">
+        <div class="list-title">
+            <h1><a th:href="@{/humun_random}">오늘 뭐 먹지?</a></h1>
+        </div>
+        <h3>목록</h3>
+        <ul>
+            <li><a th:href="@{/humun_food}">음식점</a></li>
+            <li><a th:href="@{/humun_random}">오늘 뭐 먹지?</a></li>
+        </ul>
+    </div>
+    <div class="content-container">
+        <div class="direction">
+            <div class="random-button" style="margin-left: 20pt;">
+                <div class="left-info">
+                    <h1>음식 종류 뽑기&nbsp;&nbsp;<button id="resetButton" style="background-image: url('/photo/reset.png'); background-size: cover; width: 30px; height: 30px; text-indent: -9999px; border: none;" aria-label="Reset"></button></h1>
+                    <div class="btn-container">
+                        <div id="toggleButton1" class="button" style="font-size: 14pt;">
+                            <p class="btnText">START!</p>
+                        </div>
+                        <h3 id="randomType" style="text-align: center; font-size: 14pt;"></h3>
+                    </div>
+                </div>
+                <div class="left-info">
+                    <h1>음식점 뽑기&nbsp;&nbsp;<button id="resetButton2" style="background-image: url('/photo/reset.png'); background-size: cover; width: 30px; height: 30px; text-indent: -9999px; border: none;" aria-label="Reset"></button></h1>
+                    <div class="btn-container">
+                        <div id="toggleButton2" class="button" style="font-size: 14pt;">
+                            <p class="btnText">START!</p>
+                        </div>
+                        <h3 id="randomItem" style="text-align: center; font-size: 14pt;"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        @keyframes spin {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+
+        .spinning {
+            animation: spin 2s linear infinite;
+        }
+
+        .slowing {
+            animation: spin 2s ease-out;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 모든 'type' 데이터 가져오기
+            fetch('/get_all_restaurant')
+                .then(response => response.json())
+                .then(data => {
+                    var jsonData = data.types;
+                    console.log(jsonData); // 여기를 확인해주세요.
+
+                    var toggleButton = document.getElementById('toggleButton1');
+                    var randomTypeElement = document.getElementById('randomType');
+
+                    var intervalId;
+                    var index = 0;
+
+                    toggleButton.addEventListener('click', function () {
+                        var buttonText = toggleButton.textContent.trim();
+
+                        if (buttonText === 'START!') {
+                            intervalId = setInterval(function() {
+                                randomTypeElement.innerText = jsonData[index];
+                                index = (index + 1) % jsonData.length;
+                            }, 100);
+                            toggleButton.textContent = 'STOP!';
+                            toggleButton.style.color = 'white';
+                            toggleButton.style.lineHeight = '60px';
+                        } else {
+                            clearInterval(intervalId);
+                            toggleButton.textContent = 'START!';
+                            toggleButton.style.color = 'white';
+                            toggleButton.style.lineHeight = '60px';
+                        }
+                    });
+                });
+            document.getElementById('resetButton').addEventListener('click', function () {
+                // 페이지를 새로고침
+                location.reload();
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 모든 'type' 데이터 가져오기
+            fetch('/get_all_restaurant')
+                .then(response => response.json())
+                .then(data => {
+                    var jsonData = data.items;
+                    console.log(jsonData); // 여기를 확인해주세요.
+
+                    var toggleButton = document.getElementById('toggleButton2');
+                    var randomTypeElement = document.getElementById('randomItem');
+
+                    var intervalId;
+                    var index = 0;
+
+                    toggleButton.addEventListener('click', function () {
+                        var buttonText = toggleButton.textContent.trim();
+
+                        if (buttonText === 'START!') {
+                            intervalId = setInterval(function() {
+                                randomTypeElement.innerText = jsonData[index];
+                                index = (index + 1) % jsonData.length;
+                            }, 100);
+                            toggleButton.textContent = 'STOP!';
+                            toggleButton.style.color = 'white';
+                            toggleButton.style.lineHeight = '60px';
+                        } else {
+                            clearInterval(intervalId);
+                            toggleButton.textContent = 'START!';
+                            toggleButton.style.color = 'white';
+                            toggleButton.style.lineHeight = '60px';
+                        }
+                    });
+                });
+            document.getElementById('resetButton2').addEventListener('click', function () {
+                // 페이지를 새로고침
+                location.reload();
+            });
+        });
+    </script>
+</div>
+<div class="footer">
+    <a href="https://www.kogl.or.kr/info/license.do" target="_blank"><img th:src="@{/photo/copyright.jpeg}" alt="CopyRight" style="float: right; width: 5%;"></a>
+    <a href="https://ccl.cckorea.org/about/" target="_blank"><img th:src="@{/photo/copyright2.png}" alt="CopyRight2" style="float: right; width: 5%;"></a>
+    <p style="margin-left: 20px;">Copyright © 2023 양이찬 All rights reserved.
+        <br>Dev : Ee Chan Yang
+        <br>Logo : Jun Seong Park
+        <br>Other Website Dev : Sang Yoon Kim</p>
+    <a href="https://www.flaticon.com/kr/free-icons/" title="맑은 아이콘" style="float: right; margin-right: 10px; color: white; font-size: 8pt;">맑은 아이콘  제작자: Freepik - Flaticon</a>
+</div>
+</body>
+</html>

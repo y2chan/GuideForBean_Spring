@@ -39,4 +39,8 @@ public class HomeController {
         }
         return "home";
     }
+    @RequestMapping("/m")
+    public String mobileHome(Model model) {
+        return "mobile/m_home";
+    }
 }

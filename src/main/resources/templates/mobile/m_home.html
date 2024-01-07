@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/mobile_styles.css}">
+    <title>GaBean</title>
+    <link rel="icon" th:href="@{/photo/GaBeanLogo.png}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- 경고 메시지를 표시하는 스크립트를 head에 추가 -->
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            // 경고 메시지를 나타내는 div를 생성
+            var warningDiv = document.createElement("div");
+            warningDiv.innerHTML = "이 웹은 전체화면을 권장합니다. 창의 크기를 줄일 시 정확한 기능을 사용하기 어려울 수 있습니다.";
+
+            // 스타일을 적용
+            warningDiv.style.position = "absolute";
+            warningDiv.style.top = "0";
+            warningDiv.style.left = "0";
+            warningDiv.style.width = "100%";
+            warningDiv.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+            warningDiv.style.color = "#fff";
+            warningDiv.style.textAlign = "center";
+            warningDiv.style.padding = "10px";
+
+            // body에 추가
+            document.body.appendChild(warningDiv);
+
+            // 8초 후에 경고 메시지를 숨김
+            setTimeout(function() {
+                warningDiv.style.display = "none";
+            }, 8000); // 8초 (8000 밀리초)
+        });
+    </script>
+    <style>
+        .button_ai {
+            display: inline-block;
+            padding: 12px 24px;
+            width: 13%;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007BFF;
+            border-radius: 4px;
+            border: none;
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .button_ai:hover {
+            background-color: #0056b3;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .button_ai:active {
+            background-color: #004085;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<a th:href="@{/m/m_home}">
+    <style>
+        .logo {
+            margin-top: -25px;
+            margin-left: 27.5%;
+            margin-bottom: -45px;
+        }
+
+        .logo img {
+            max-width: 200px;
+        }
+    </style>
+    <div class="logo">
+        <img th:src="@{/photo/GaBean1.png}" alt="Your Logo">
+    </div>
+</a>
+<div id="menu-container">
+    <div class="btn"></div>
+    <div onclick="history.back();" class="page_cover"></div>
+    <div id="menu">
+        <ul class="nav">
+            <li>
+                <a th:href="@{/m/info_gabean}">GaBean이란?</a>
+            </li>
+            <li>
+                <a>캠퍼스맵</a>
+                <ul class="sub_mobile">
+                    <li><a th:href="@{/m/campusmap}">캠퍼스맵</a></li>
+                    <li><a th:href="@{/m/campusmap_detail}">상세 정보</a></li>
+                </ul>
+            </li>
+            <li>
+                <a>후문</a>
+                <ul class="sub_mobile">
+                    <li><a th:href="@{/m/humun_food}">음식점</a></li>
+                    <li><a th:href="@{/m/humun_random}">오늘 뭐 먹지?</a></li>
+                </ul>
+            </li>
+            <li>
+                <a>학교 정보</a>
+                <ul class="sub_mobile">
+                    <li><a th:href="@{/m/info_sugang}">수강 정보</a></li>
+                    <li><a th:href="@{/m/info_graduate}">졸업 정보</a></li>
+                    <li><a th:href="@{/m/info_library}">도서관</a></li>
+                </ul>
+            </li>
+            <li>
+                <a>교통</a>
+                <ul class="sub_mobile">
+                    <li><a th:href="@{/m/info_bus}">버스</a></li>
+                    <li><a th:href="@{/m/info_subway}">지하철</a></li>
+                    <li><a th:href="@{/m/info_shuttle}">셔틀버스</a></li>
+                </ul>
+            </li>
+            <li>
+                <a th:href="@{/sound_kong}">콩들의 소리</a>
+            </li>
+        </ul>
+            <div onclick="history.back();" class="close">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+    $(".btn").click(function() {
+      $("#menu,.page_cover,html").addClass("open");
+      window.location.hash = "#open";
+    })
+    })
+
+    window.onhashchange = function() {
+      if (location.hash != "#open") {
+        $("#menu,.page_cover,html").removeClass("open");
+      }
+    };
+
+    $(document).ready(function(){
+    $("#menu ul.sub_mobile").hide();
+    $("#menu ul.nav li").click(function(){
+    $("ul",this).slideToggle("fast");
+    })
+    })
+</script>
+<div class="home-description" style="display: flex; justify-content: center; margin-bottom: 20px; margin-top: 70px;">
+    <style>
+        table {
+            width: 90%;
+            height: 300px;
+        }
+        button {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            border: none;
+            padding: 2px;
+            outline: none;
+            background-clip: padding-box;
+            font-size: 14pt;
+        }
+        td {
+            width: 70px;
+            height: 150px;
+            border: none; /* 모든 테두리 제거 */
+            border-right: 1px solid #c0c0c0; /* 오른쪽 테두리 생성 */
+            border-bottom: 1px solid #c0c0c0;
+            padding: 0;
+            outline: none;
+        }
+
+        td:last-child {
+            border-right: none; /* 마지막 요소의 테두리 제거 */
+        }
+
+    </style>
+    <table>
+        <tr>
+            <td><a th:href="@{/m/campusmap}"><button><span style="font-size: 30pt;">🏢</span><br><br>캠퍼스맵</button></a></td>
+            <td><a th:href="@{/m/m_info_bus}"><button><span style="font-size: 30pt;">🚃</span><br><br>버스</button></a></td>
+            <td><a th:href="@{/m/m_info_subway}"><button><span style="font-size: 30pt;">🚊</span><br><br>지하철</button></a></td>
+            <td><a th:href="@{/m/m_info_shuttle}"><button><span style="font-size: 30pt;">🚋</span><br><br>셔틀</button></a></td>
+        <tr>
+            <td style="border-bottom: none;"><a th:href="@{/m/m_humun_random}"><button><span style="font-size: 30pt;">🍴</span><br>오늘 뭐<br> 먹지?</button></a></td>
+            <td style="border-bottom: none;"><a th:href="@{/m/m_info_sugang}"><button><span style="font-size: 30pt;">📝</span><br><br>수강 정보</button></a></td>
+            <td style="border-bottom: none;"><a th:href="@{/m/m_info_graduate}"><button><span style="font-size: 30pt;">🎓</span><br><br>졸업 정보</button></a></td>
+            <td style="border-bottom: none;"><a th:href="@{/m/m_info_library}"><button><span style="font-size: 30pt;">📚</span><br><br>도서관</button></a></td>
+        </tr>
+    </table>
+</div>
+<style>
+    .button_ai {
+        display: inline-block;
+        padding: 12px 24px;
+        width: 50%;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        background-color: #007BFF;
+        border-radius: 4px;
+        border: none;
+        transition: all 0.3s ease 0s;
+        cursor: pointer;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .button_ai:hover {
+        background-color: #0056b3;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .button_ai:active {
+        background-color: #004085;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    }
+</style>
+<div class="home-description" style="margin-top: 40px;">
+    <a th:href="@{/m/m_summarize}"><div class="button_ai">AI 문서 요약 서비스</div></a>
+    <a th:href="@{/m/m_humun_food}"><div class="button_ai" style="margin-top: 10px;">후문
+        음식점 정보 보기</div></a>
+</div>
+<button class="fixed-button" id="openSlider"></button>
+
+<!-- 슬라이드인 메뉴 -->
+<div class="slider-menu">
+    <div class="slider-content">
+        ID : 학번 / PW : SU-WINGs PW
+        <br>(즉, SU-WINGs 로그인과 방식이 같다)
+    </div>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        // 버튼 엘리먼트 가져오기
+        var fixedButton = document.querySelector('.fixed-button');
+
+        // 스크롤 이벤트 리스너 등록
+        window.addEventListener('scroll', function() {
+            // 스크롤 위치 가져오기
+            var scrollY = window.scrollY;
+            // 원하는 스크롤 위치 이상이면 버튼 위치 변경
+            if (scrollY > 200) { // 원하는 스크롤 위치로 수정
+               fixedButton.style.bottom = '100px'; // 원하는 위치로 조절 가능
+            } else {
+                fixedButton.style.bottom = '100px'; // 다시 초기 위치로 조절 가능
+            }
+        });
+
+        // 초기 버튼 위치 설정
+        fixedButton.style.bottom = '100px';
+        fixedButton.style.right = '0%';
+    });
+
+    var imageButton = document.getElementById('openSlider');
+
+    // 클릭 이벤트 리스너 등록
+    imageButton.addEventListener('click', function() {
+        // 클릭 시 이미지 변경
+        imageButton.classList.toggle('clicked');
+    });
+</script>
+<script>
+    // 슬라이드인 메뉴 열기/닫기
+    var openSliderButton = document.getElementById('openSlider');
+    var sliderMenu = document.querySelector('.slider-menu');
+
+    sliderMenu.style.bottom = '100px';
+
+    openSliderButton.addEventListener('click', function() {
+        if (sliderMenu.style.right === '-350px' || sliderMenu.style.right === '') {
+            sliderMenu.style.right = '60px';
+        } else {
+            sliderMenu.style.right = '-350px';
+        }
+    });
+</script>
+<div class="news-button-container">
+    <button id="newsButton" class="newsButton" style="font-size: 15px;">SYU<br>뉴스</button>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var newsButton = document.getElementById('newsButton');
+
+        // 초기 버튼 위치 설정
+        newsButton.style.bottom = '35px';
+        newsButton.style.right = '0px';
+
+        newsButton.addEventListener('click', function() {
+			window.location.href = /*[[@{/m/m_news}]]*/ '';
+        });
+    });
+</script>
+
+<div class="footer">
+    <a href="https://www.kogl.or.kr/info/license.do" target="_blank"><img th:src="@{/photo/copyright.jpeg}" alt="CopyRight" style="float: right; width: 5%;"></a>
+    <a href="https://ccl.cckorea.org/about/" target="_blank"><img th:src="@{/photo/copyright2.png}" alt="CopyRight2" style="float: right; width: 5%;"></a>
+    <p style="margin-left: 20px; font-size: 8px;">Copyright © 2023 양이찬 All rights reserved.
+        <br>Dev : Ee Chan Yang
+        <br>Logo : Jun Seong Park
+        <br>Other Website Dev : Sang Yoon Kim</p>
+    <a href="https://www.flaticon.com/kr/free-icons/" title="맑은 아이콘" style="float: right; margin-right: 10px; color: white; font-size: 8pt;">맑은 아이콘  제작자: Freepik - Flaticon</a>
+</div>
+</body>
+</html>

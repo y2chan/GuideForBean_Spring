@@ -1,5 +1,6 @@
 package com.example.Gabean;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -26,8 +27,8 @@ public class NewsController {
     @Value("${naver.client.secret}")
     private String clientSecret;
 
-    @RequestMapping("/news")
-    public String newsSearch(@RequestParam(value = "query", defaultValue = "") String query, Model model) {
+    @RequestMapping(value = {"/news", "/m/m_news"})
+    public String newsSearch(@RequestParam(value = "query", defaultValue = "") String query, Model model, HttpServletRequest request) {
         if (!query.isEmpty()) {
             WebClient webClient = WebClient.builder()
                     .baseUrl("https://openapi.naver.com/v1/search/news.json")
@@ -53,6 +54,12 @@ public class NewsController {
 
         model.addAttribute("query", query);
 
-        return "news";
+        String viewName = "news";
+
+        if (request.getRequestURI().startsWith("/m/")) {
+            viewName = "mobile/m_news";
+        }
+
+        return viewName;
     }
 }
