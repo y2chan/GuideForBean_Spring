@@ -37,7 +37,7 @@ public class HumunFoodController {
         this.humunFoodService = humunFoodService;
     }
 
-    @GetMapping({"/", "/m/m_humun_food"})
+    @GetMapping({"/humun_food", "/m/m_humun_food"})
     public String getRestaurants(Model model, HttpServletRequest request) {
         // 식당 목록과 식당 유형을 가져옵니다.
         List<HumunFood> restaurants = humunFoodService.getAllHumunFoods();

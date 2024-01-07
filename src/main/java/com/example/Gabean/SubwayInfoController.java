@@ -76,6 +76,9 @@ public class SubwayInfoController {
 
                 groupedData.put("direction_" + (i + 1), directionData);
 
+                // 콘솔에 해당 방향의 데이터를 출력합니다.
+                System.out.println("groupedData['direction_" + (i + 1) + "']: " + directionData);
+
             } catch (Exception e) {
                 // Error handling logic here
                 e.printStackTrace();

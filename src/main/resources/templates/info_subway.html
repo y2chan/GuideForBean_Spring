@@ -154,7 +154,7 @@
                             </div>
                         </div>
                     </div>
-                    <div th:unless="${groupedData['direction_1']}">
+                    <div th:if="${groupedData['direction_1'].empty}">
                         <div class="bus-info-container">
                             <div class="right-column">
                                 <ul>
@@ -185,7 +185,7 @@
                             </div>
                         </div>
                     </div>
-                    <div th:unless="${groupedData['direction_2']}">
+                    <div th:if="${groupedData['direction_2'].empty}">
                         <div class="bus-info-container">
                             <div class="right-column">
                                 <ul>
@@ -215,7 +215,7 @@
                             </div>
                         </div>
                     </div>
-                    <div th:unless="${groupedData['direction_3']}">
+                    <div th:if="${groupedData['direction_3'].empty}">
                         <div class="bus-info-container">
                             <div class="right-column">
                                 <ul>
@@ -245,7 +245,7 @@
                             </div>
                         </div>
                     </div>
-                    <div th:unless="${groupedData['direction_4']}">
+                    <div th:if="${groupedData['direction_4'].empty}">
                         <div class="bus-info-container">
                             <div class="right-column">
                                 <ul>
