@@ -53,7 +53,7 @@ public class HumunFoodService {
                         break; // 영업 중이므로 더 이상 확인하지 않음
                     } else if (currentTime.isBefore(openingHour.getOpenTime())) {
                         // 현재 시간이 오픈 시간 전이라면 영업 전
-                        restaurant.setOpenStatus("영업 전");
+                        restaurant.setOpenStatus("마감");
                         Duration duration = Duration.between(currentTime, openingHour.getOpenTime());
                         restaurant.setRemainingTime(formatDuration(duration));
                         isOpen = true;

@@ -12,8 +12,8 @@ public class OpeningHours {
     private Long id;
 
     private String week;
-    private LocalTime openTime;
-    private LocalTime closeTime;
+    private LocalTime open_Time;
+    private LocalTime close_Time;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
@@ -40,19 +40,19 @@ public class OpeningHours {
     }
 
     public LocalTime getOpenTime() {
-        return openTime;
+        return open_Time;
     }
 
     public void setOpenTime(LocalTime openTime) {
-        this.openTime = openTime;
+        this.open_Time = openTime;
     }
 
     public LocalTime getCloseTime() {
-        return closeTime;
+        return close_Time;
     }
 
     public void setCloseTime(LocalTime closeTime) {
-        this.closeTime = closeTime;
+        this.close_Time = closeTime;
     }
 
     public HumunFood getRestaurant() {
