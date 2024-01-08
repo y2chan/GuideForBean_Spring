@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" th:href="@{/mobile_styles.css}">
-    <title>상세 정보</title>
+    <title>오늘 뭐 먹지?</title>
     <link rel="icon" th:href="@{/photo/GaBeanLogo.png}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,43 +86,133 @@
 <div class="page-title-img">
 </div>
 <div class="list-title">
-    <h1><a th:href="@{/m/m_campusmap_detail}">상세 정보</a></h1>
+    <h1><a th:href="@{/m/m_humun_random}">오늘 뭐 먹지?</a></h1>
 </div>
 <div class="list-container">
     <ul>
         <h3>목록</h3>
-        <li><a th:href="@{//m/m_campusmap}">캠퍼스맵</a></li>
-        <li><a th:href="@{//m/m_campusmap_detail}">상세 정보</a></li>
+        <li><a th:href="@{/m/m_humun_food}">음식점</a></li>
+        <li><a th:href="@{/m/m_humun_random}">오늘 뭐 먹지?</a></li>
     </ul>
 </div>
 <div class="main-container">
     <div class="content-container">
-        <div class="main-container">
-            <div class="info-bus">
-                <div class="direction" style="width: 310px;">
-                    <h1 style="text-decoration: skyblue wavy underline; font-family: 'Noto Sans KR', sans-serif; font-size: 20pt;">학생들이 많이 찾는 것!</h1>
-                    <h3 style="font-size: 13pt;">1. 장근청홀</h3>
-                    <a>- 백주년 기념관 3층</a>
-                    <h3 style="font-size: 13pt;">2. 다목적관(=보건복지교육관)</h3>
-                    <a>- 만나의집, 기숙사 사이 건물 1층짜리</a>
-                    <h3 style="font-size: 13pt;">3. 홍명기홀</h3>
-                    <a>- 다니엘관 지하 1층</a>
-                    <h3 style="font-size: 13pt;">4. 프린트는 도서관 or 바울관 지하 현대문구 추천</h3>
-                    <h3 style="font-size: 13pt;">5. 바울관 1층에서 각종 증명서 무인으로 발급 가능!</h3>
-                    <h3 style="font-size: 13pt;">6. 보조배터리는 배터리몬 어플 깔아서 다니엘관 1층, 바울관 1층, 엠카페 쪽에서 대여 및 반납 가능함.</h3>
-                    <a>- 학생회비 납부한 사람은 납부 확인(수윙스 납부확인서) 안경점 옆 학생회실에서 무료 대여 가능함!</a>
-                    <h3 style="font-size: 13pt;">7. 교내 가게 + 후문 일부 가게에서 수페이 사용 가능 (ex. 스마일하우 등)</h3>
-                    <h3 style="font-size: 13pt;">8. 후문 gs25, 후문 CU는 24시 영업</h3>
-                    <a>- 방학 기간 단축영업 : 00-06시 미영업</a>
-                    <br><br><br>
-                    <a style="float: right; font-size:10pt;">모든 정보는 23년도 기준이며<br> 추가로 제보할 내용이 있으면&nbsp;</a><br><br><a style="float: right; font-size:10pt;">에 제보 바랍니다.</a><a style="color: black; text-decoration: black underline; float: right; font-size:11pt;">콩들의 소리</a>
-                    <a href="https://everytime.kr/384376/v/296575382" style="float: right; font-size:10pt; text-decoration: black underline;" target="_blank">https://everytime.kr/384376/v/296575382</a><a style="float: right; font-size:10pt;">출처 :&nbsp;</a>
+        <div class="direction">
+            <div class="random-button" style="margin-left: 20pt;">
+                <div class="left-info">
+                    <h1>음식 종류 뽑기&nbsp;&nbsp;<button id="resetButton" style="background-image: url('/photo/reset.png'); background-size: cover; width: 30px; height: 30px; text-indent: -9999px; border: none;" aria-label="Reset"></button></h1>
+                    <div class="btn-container">
+                        <div id="toggleButton1" class="button" style="font-size: 14pt;">
+                            <p class="btnText">START!</p>
+                        </div>
+                        <h3 id="randomType" style="text-align: center; font-size: 14pt;"></h3>
+                    </div>
+                    <h1>음식점 뽑기&nbsp;&nbsp;<button id="resetButton2" style="background-image: url('/photo/reset.png'); background-size: cover; width: 30px; height: 30px; text-indent: -9999px; border: none;" aria-label="Reset"></button></h1>
+                    <div class="btn-container">
+                        <div id="toggleButton2" class="button" style="font-size: 14pt;">
+                            <p class="btnText">START!</p>
+                        </div>
+                        <h3 id="randomItem" style="text-align: center; font-size: 14pt;"></h3>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <style>
+        @keyframes spin {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
 
+        .spinning {
+            animation: spin 2s linear infinite;
+        }
+
+        .slowing {
+            animation: spin 2s ease-out;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 모든 'type' 데이터 가져오기
+            fetch('/get_all_restaurant')
+                .then(response => response.json())
+                .then(data => {
+                    var jsonData = data.types;
+                    console.log(jsonData); // 여기를 확인해주세요.
+
+                    var toggleButton = document.getElementById('toggleButton1');
+                    var randomTypeElement = document.getElementById('randomType');
+
+                    var intervalId;
+                    var index = 0;
+
+                    toggleButton.addEventListener('click', function () {
+                        var buttonText = toggleButton.textContent.trim();
+
+                        if (buttonText === 'START!') {
+                            intervalId = setInterval(function() {
+                                randomTypeElement.innerText = jsonData[index];
+                                index = (index + 1) % jsonData.length;
+                            }, 100);
+                            toggleButton.textContent = 'STOP!';
+                            toggleButton.style.color = 'white';
+                            toggleButton.style.lineHeight = '60px';
+                        } else {
+                            clearInterval(intervalId);
+                            toggleButton.textContent = 'START!';
+                            toggleButton.style.color = 'white';
+                            toggleButton.style.lineHeight = '60px';
+                        }
+                    });
+                });
+            document.getElementById('resetButton').addEventListener('click', function () {
+                // 페이지를 새로고침
+                location.reload();
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 모든 'type' 데이터 가져오기
+            fetch('/get_all_restaurant')
+                .then(response => response.json())
+                .then(data => {
+                    var jsonData = data.items;
+                    console.log(jsonData); // 여기를 확인해주세요.
+
+                    var toggleButton = document.getElementById('toggleButton2');
+                    var randomTypeElement = document.getElementById('randomItem');
+
+                    var intervalId;
+                    var index = 0;
+
+                    toggleButton.addEventListener('click', function () {
+                        var buttonText = toggleButton.textContent.trim();
+
+                        if (buttonText === 'START!') {
+                            intervalId = setInterval(function() {
+                                randomTypeElement.innerText = jsonData[index];
+                                index = (index + 1) % jsonData.length;
+                            }, 100);
+                            toggleButton.textContent = 'STOP!';
+                            toggleButton.style.color = 'white';
+                            toggleButton.style.lineHeight = '60px';
+                        } else {
+                            clearInterval(intervalId);
+                            toggleButton.textContent = 'START!';
+                            toggleButton.style.color = 'white';
+                            toggleButton.style.lineHeight = '60px';
+                        }
+                    });
+                });
+            document.getElementById('resetButton2').addEventListener('click', function () {
+                // 페이지를 새로고침
+                location.reload();
+            });
+        });
+    </script>
+</div>
 <button class="fixed-button" id="openSlider"></button>
 
 <!-- 슬라이드인 메뉴 -->

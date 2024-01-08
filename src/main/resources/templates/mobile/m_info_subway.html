@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/mobile_styles.css}">
+    <title>지하철</title>
+    <link rel="icon" th:href="@{/photo/GaBeanLogo.png}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<a th:href="@{/m}">
+    <div class="logo">
+        <img th:src="@{/photo/GaBean.png}" alt="Your Logo">
+    </div>
+</a>
+<div id="menu-container">
+    <div class="btn"></div>
+    <div onclick="history.back();" class="page_cover"></div>
+    <div id="menu">
+        <ul class="nav">
+            <li>
+                <a th:href="@{/m/m_info_gabean}">GaBean이란?</a>
+            </li>
+            <li>
+                <a>캠퍼스맵</a>
+                <ul class="sub_mobile">
+                    <li><a th:href="@{/m/m_campusmap}">캠퍼스맵</a></li>
+                    <li><a th:href="@{/m/m_campusmap_detail}">상세 정보</a></li>
+                </ul>
+            </li>
+            <li>
+                <a>후문</a>
+                <ul class="sub_mobile">
+                    <li><a th:href="@{/m/m_humun_food}">음식점</a></li>
+                    <li><a th:href="@{/m/m_humun_random}">오늘 뭐 먹지?</a></li>
+                </ul>
+            </li>
+            <li>
+                <a>학교 정보</a>
+                <ul class="sub_mobile">
+                    <li><a th:href="@{/m/m_info_sugang}">수강 정보</a></li>
+                    <li><a th:href="@{/m/m_info_graduate}">졸업 정보</a></li>
+                    <li><a th:href="@{/m/m_info_library}">도서관</a></li>
+                </ul>
+            </li>
+            <li>
+                <a>교통</a>
+                <ul class="sub_mobile">
+                    <li><a th:href="@{/m/m_info_bus}">버스</a></li>
+                    <li><a th:href="@{/m/m_info_subway}">지하철</a></li>
+                    <li><a th:href="@{/m/m_info_shuttle}">셔틀버스</a></li>
+                </ul>
+            </li>
+            <li>
+                <a th:href="@{/m/m_sound_kong}">콩들의 소리</a>
+            </li>
+        </ul>
+        <div onclick="history.back();" class="close">
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    $(document).ready(function() {
+    $(".btn").click(function() {
+      $("#menu,.page_cover,html").addClass("open");
+      window.location.hash = "#open";
+    })
+    })
+
+    window.onhashchange = function() {
+      if (location.hash != "#open") {
+        $("#menu,.page_cover,html").removeClass("open");
+      }
+    };
+
+    $(document).ready(function(){
+    $("#menu ul.sub_mobile").hide();
+    $("#menu ul.nav li").click(function(){
+    $("ul",this).slideToggle("fast");
+    })
+    })
+</script>
+<div class="page-title-img">
+</div>
+<div class="list-title">
+    <h1><a th:href="@{/m/m_info_subway}">지하철</a></h1>
+</div>
+<div class="list-container">
+    <ul>
+        <h3>목록</h3>
+        <li><a th:href="@{/m/m_info_bus}">버스</a></li>
+        <li><a th:href="@{/m/m_info_subway}">지하철</a></li>
+        <li><a th:href="@{/m/m_info_shuttle}">셔틀버스</a></li>
+    </ul>
+</div>
+<div class="main-container">
+    <div class="content-container">
+        <div class="main-container">
+            <div class="info-bus">
+                <div class="direction" style="width: 310px;">
+                    <h1 style="text-decoration: skyblue wavy underline; font-family: 'Noto Sans KR', sans-serif; font-size: 25pt;">화랑대역</h1>
+                    <div th:if="${groupedData['direction_1']}">
+                        <div th:each="data, stat : ${groupedData['direction_1']}"
+                             th:if="${stat.index == 0}" class="bus-info-container">
+                            <div class="right-column">
+                                <ul>
+                                    <h3 th:text="${data.trainLineNm}">열차 라인명</h3>
+                                    <br>
+                                    <li>
+                                        <h5 style="margin-right: 100px;" th:text="${data.arvlMsg2}">도착 메시지</h5>
+                                        <h5 th:text="${data.recptnDt}">수신 날짜</h5>
+                                    </li>
+                                    <hr>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${groupedData['direction_1'].empty}">
+                        <div class="bus-info-container">
+                            <div class="right-column">
+                                <ul>
+                                    <li>
+                                        <h3>현재 지하철 정보가 없습니다.</h3>
+                                    </li>
+                                    <hr>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="direction">
+                    <h1 style="text-decoration: skyblue wavy underline; font-family: 'Noto Sans KR', sans-serif; font-size: 25pt;">태릉입구역</h1>
+                    <div th:if="${groupedData['direction_2']}">
+                        <div th:each="data, stat : ${groupedData['direction_2']}"
+                             th:if="${stat.index == 0}" class="bus-info-container">
+                            <div class="right-column">
+                                <ul>
+                                    <h3 th:text="${data.trainLineNm}">열차 라인명</h3>
+                                    <br>
+                                    <li>
+                                        <h5 style="margin-right: 100px;" th:text="${data.arvlMsg2}">도착 메시지</h5>
+                                        <h5 th:text="${data.recptnDt}">수신 날짜</h5>
+                                    </li>
+                                    <hr>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${groupedData['direction_2'].empty}">
+                        <div class="bus-info-container">
+                            <div class="right-column">
+                                <ul>
+                                    <li>
+                                        <h3>현재 지하철 정보가 없습니다.</h3>
+                                    </li>
+                                    <hr>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="direction">
+                    <h1 style="text-decoration: skyblue wavy underline; font-family: 'Noto Sans KR', sans-serif; font-size: 25pt;">석계역</h1>
+                    <div th:if="${groupedData['direction_3']}">
+                        <div th:each="data, stat : ${groupedData['direction_3']}"
+                             th:if="${stat.index == 0}" class="bus-info-container">
+                            <div class="right-column">
+                                <ul>
+                                    <h3 th:text="${data.trainLineNm}">열차 라인명</h3>
+                                    <br>
+                                    <li>
+                                        <h5 style="margin-right: 100px;" th:text="${data.arvlMsg2}">도착 메시지</h5>
+                                        <h5 th:text="${data.recptnDt}">수신 날짜</h5>
+                                    </li>
+                                    <hr>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${groupedData['direction_3'].empty}">
+                        <div class="bus-info-container">
+                            <div class="right-column">
+                                <ul>
+                                    <li>
+                                        <h3>현재 지하철 정보가 없습니다.</h3>
+                                    </li>
+                                    <hr>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="direction">
+                    <h1 style="text-decoration: skyblue wavy underline; font-family: 'Noto Sans KR', sans-serif; font-size: 25pt;">별내역</h1>
+                    <div th:if="${groupedData['direction_4']}">
+                        <div th:each="data, stat : ${groupedData['direction_4']}"
+                             th:if="${stat.index == 0}" class="bus-info-container">
+                            <div class="right-column">
+                                <ul>
+                                    <h3 th:text="${data.trainLineNm}">열차 라인명</h3>
+                                    <br>
+                                    <li>
+                                        <h5 style="margin-right: 100px;" th:text="${data.arvlMsg2}">도착 메시지</h5>
+                                        <h5 th:text="${data.recptnDt}">수신 날짜</h5>
+                                    </li>
+                                    <hr>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${groupedData['direction_4'].empty}">
+                        <div class="bus-info-container">
+                            <div class="right-column">
+                                <ul>
+                                    <li>
+                                        <h3>현재 지하철 정보가 없습니다.</h3>
+                                    </li>
+                                    <hr>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="fixed-button" id="openSlider"></button>
+
+<!-- 슬라이드인 메뉴 -->
+<div class="slider-menu">
+    <div class="slider-content">
+        ID : 학번 / PW : SU-WINGs PW
+        <br>(즉, SU-WINGs 로그인과 방식이 같다)
+    </div>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        // 버튼 엘리먼트 가져오기
+        var fixedButton = document.querySelector('.fixed-button');
+
+        // 스크롤 이벤트 리스너 등록
+        window.addEventListener('scroll', function() {
+            // 스크롤 위치 가져오기
+            var scrollY = window.scrollY;
+            // 원하는 스크롤 위치 이상이면 버튼 위치 변경
+            if (scrollY > 200) { // 원하는 스크롤 위치로 수정
+               fixedButton.style.bottom = '100px'; // 원하는 위치로 조절 가능
+            } else {
+                fixedButton.style.bottom = '100px'; // 다시 초기 위치로 조절 가능
+            }
+        });
+
+        // 초기 버튼 위치 설정
+        fixedButton.style.bottom = '100px';
+        fixedButton.style.right = '0%';
+    });
+
+    var imageButton = document.getElementById('openSlider');
+
+    // 클릭 이벤트 리스너 등록
+    imageButton.addEventListener('click', function() {
+        // 클릭 시 이미지 변경
+        imageButton.classList.toggle('clicked');
+    });
+</script>
+<script>
+    // 슬라이드인 메뉴 열기/닫기
+    var openSliderButton = document.getElementById('openSlider');
+    var sliderMenu = document.querySelector('.slider-menu');
+
+    sliderMenu.style.bottom = '100px';
+
+    openSliderButton.addEventListener('click', function() {
+        if (sliderMenu.style.right === '-350px' || sliderMenu.style.right === '') {
+            sliderMenu.style.right = '60px';
+        } else {
+            sliderMenu.style.right = '-350px';
+        }
+    });
+</script>
+<div class="news-button-container">
+    <!-- Thymeleaf를 사용하여 URL을 data 속성에 설정 -->
+    <button id="newsButton" class="newsButton" style="font-size: 15px;" th:data-url="@{/m/m_news}">SYU<br>뉴스</button>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var newsButton = document.getElementById('newsButton');
+
+        // 초기 버튼 위치 설정
+        newsButton.style.bottom = '35px';
+        newsButton.style.right = '0px';
+
+        newsButton.addEventListener('click', function() {
+            // 버튼의 data-url 속성에서 URL을 가져와 이동
+            window.location.href = newsButton.getAttribute('data-url');
+        });
+    });
+</script>
+
+<div class="footer">
+    <a href="https://www.kogl.or.kr/info/license.do" target="_blank"><img th:src="@{/photo/copyright.jpeg}" alt="CopyRight" style="float: right; width: 5%;"></a>
+    <a href="https://ccl.cckorea.org/about/" target="_blank"><img th:src="@{/photo/copyright2.png}" alt="CopyRight2" style="float: right; width: 5%;"></a>
+    <p style="margin-left: 20px; font-size: 8px;">Copyright © 2023 양이찬 All rights reserved.
+        <br>Dev : Ee Chan Yang
+        <br>Logo : Jun Seong Park
+        <br>Other Website Dev : Sang Yoon Kim</p>
+    <a href="https://www.flaticon.com/kr/free-icons/" title="맑은 아이콘" style="float: right; margin-right: 10px; color: white; font-size: 8pt;">맑은 아이콘  제작자: Freepik - Flaticon</a>
+</div>
+</body>
+</html>

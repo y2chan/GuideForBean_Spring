@@ -255,7 +255,8 @@
     });
 </script>
 <div class="news-button-container">
-    <button id="newsButton" class="newsButton" style="font-size: 15px;">SYU<br>뉴스</button>
+    <!-- Thymeleaf를 사용하여 URL을 data 속성에 설정 -->
+    <button id="newsButton" class="newsButton" style="font-size: 15px;" th:data-url="@{/m/m_news}">SYU<br>뉴스</button>
 </div>
 <script>
     window.addEventListener('DOMContentLoaded', (event) => {
@@ -266,7 +267,8 @@
         newsButton.style.right = '0px';
 
         newsButton.addEventListener('click', function() {
-			window.location.href = /*[[@{/m/m_news}]]*/ '';
+            // 버튼의 data-url 속성에서 URL을 가져와 이동
+            window.location.href = newsButton.getAttribute('data-url');
         });
     });
 </script>

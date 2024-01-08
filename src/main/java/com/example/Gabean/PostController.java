@@ -19,7 +19,7 @@ public class PostController {
     @Autowired
     private PostRepository postRepository; // PostRepository는 Post 엔티티에 대한 Spring Data JPA 인터페이스입니다.
 
-    @GetMapping(value = {"/sound_kong", "/m/sound_kong"})
+    @GetMapping(value = {"/sound_kong", "/m/m_sound_kong"})
     public String soundKong(Model model, HttpServletRequest request) {
         List<Post> posts = postRepository.findAll();
         model.addAttribute("posts", posts);
@@ -41,7 +41,7 @@ public class PostController {
 
     @GetMapping("/m/m_sound_kong_write")
     public ModelAndView mobileshowWriteForm() {
-        return new ModelAndView("mobile/sound_kong_write", "postForm", new PostForm());
+        return new ModelAndView("mobile/m_sound_kong_write", "postForm", new PostForm());
     }
 
     // 게시물 작성 요청을 처리하는 메소드
