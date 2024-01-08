@@ -26,9 +26,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Controller
-@RequestMapping("/humun_food")
 public class HumunFoodController {
     private final HumunFoodService humunFoodService;
 
@@ -37,7 +38,7 @@ public class HumunFoodController {
         this.humunFoodService = humunFoodService;
     }
 
-    @GetMapping({"/humun_food", "/m/m_humun_food"})
+    @GetMapping(value = {"/humun_food", "/m/m_humun_food"})
     public String getRestaurants(Model model, HttpServletRequest request) {
         // 식당 목록과 식당 유형을 가져옵니다.
         List<HumunFood> restaurants = humunFoodService.getAllHumunFoods();
@@ -61,13 +62,15 @@ public class HumunFoodController {
         model.addAttribute("restaurantTypes", restaurantTypes);
         model.addAttribute("currentDateTime", formattedCurrentTime);
 
-        // 요청된 URL에 따라 다른 뷰를 반환합니다.
-        String requestURL = request.getRequestURI();
+        // 뷰 선택 로직
+        String viewName = "humun_food";
+        String requestURL = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getRequestURI();
+
         if (requestURL.startsWith("/m/")) {
-            return "mobile/m_humun_food"; // 모바일 경로에 대한 뷰
-        } else {
-            return "humun_food"; // 기본 경로에 대한 뷰
+            viewName = "mobile/m_humun_food";
         }
+
+        return viewName;
     }
 }
 

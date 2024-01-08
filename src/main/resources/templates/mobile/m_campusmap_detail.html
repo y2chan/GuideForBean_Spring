@@ -9,49 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <style>
-        .button_ai {
-            display: inline-block;
-            padding: 12px 24px;
-            width: 13%;
-            font-size: 16px;
-            font-weight: 600;
-            text-align: center;
-            text-decoration: none;
-            color: #fff;
-            background-color: #007BFF;
-            border-radius: 4px;
-            border: none;
-            transition: all 0.3s ease 0s;
-            cursor: pointer;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-        }
-
-        .button_ai:hover {
-            background-color: #0056b3;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-        }
-
-        .button_ai:active {
-            background-color: #004085;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-        }
-    </style>
 </head>
 <a th:href="@{/m}">
-    <style>
-        .logo {
-            margin-top: -25px;
-            margin-left: 27.5%;
-            margin-bottom: -45px;
-        }
-
-        .logo img {
-            max-width: 200px;
-        }
-    </style>
     <div class="logo">
-        <img th:src="@{/photo/GaBean1.png}" alt="Your Logo">
+        <img th:src="@{/photo/GaBean.png}" alt="Your Logo">
     </div>
 </a>
 <div id="menu-container">
@@ -60,7 +21,7 @@
     <div id="menu">
         <ul class="nav">
             <li>
-                <a th:href="@{/m/m_info_gabean}">GaBean이란?</a>
+                <a th:href="@{/m/info_gabean}">GaBean이란?</a>
             </li>
             <li>
                 <a>캠퍼스맵</a>
@@ -96,10 +57,10 @@
                 <a th:href="@{/m/m_sound_kong}">콩들의 소리</a>
             </li>
         </ul>
-            <div onclick="history.back();" class="close">
-            </div>
+        <div onclick="history.back();" class="close">
         </div>
     </div>
+</div>
 </div>
 <script>
     $(document).ready(function() {
@@ -122,84 +83,46 @@
     })
     })
 </script>
-<div class="home-description" style="display: flex; justify-content: center; margin-bottom: 20px; margin-top: 70px;">
-    <style>
-        table {
-            width: 90%;
-            height: 300px;
-        }
-        button {
-            width: 100%;
-            height: 100%;
-            background-color: white;
-            border: none;
-            padding: 2px;
-            outline: none;
-            background-clip: padding-box;
-            font-size: 14pt;
-        }
-        td {
-            width: 70px;
-            height: 150px;
-            border: none; /* 모든 테두리 제거 */
-            border-right: 1px solid #c0c0c0; /* 오른쪽 테두리 생성 */
-            border-bottom: 1px solid #c0c0c0;
-            padding: 0;
-            outline: none;
-        }
-
-        td:last-child {
-            border-right: none; /* 마지막 요소의 테두리 제거 */
-        }
-
-    </style>
-    <table>
-        <tr>
-            <td><a th:href="@{/m/m_campusmap}"><button><span style="font-size: 30pt;">🏢</span><br><br>캠퍼스맵</button></a></td>
-            <td><a th:href="@{/m/m_info_bus}"><button><span style="font-size: 30pt;">🚃</span><br><br>버스</button></a></td>
-            <td><a th:href="@{/m/m_info_subway}"><button><span style="font-size: 30pt;">🚊</span><br><br>지하철</button></a></td>
-            <td><a th:href="@{/m/m_info_shuttle}"><button><span style="font-size: 30pt;">🚋</span><br><br>셔틀</button></a></td>
-        <tr>
-            <td style="border-bottom: none;"><a th:href="@{/m/m_humun_random}"><button><span style="font-size: 30pt;">🍴</span><br>오늘 뭐<br> 먹지?</button></a></td>
-            <td style="border-bottom: none;"><a th:href="@{/m/m_info_sugang}"><button><span style="font-size: 30pt;">📝</span><br><br>수강 정보</button></a></td>
-            <td style="border-bottom: none;"><a th:href="@{/m/m_info_graduate}"><button><span style="font-size: 30pt;">🎓</span><br><br>졸업 정보</button></a></td>
-            <td style="border-bottom: none;"><a th:href="@{/m/m_info_library}"><button><span style="font-size: 30pt;">📚</span><br><br>도서관</button></a></td>
-        </tr>
-    </table>
+<div class="page-title-img">
 </div>
-<style>
-    .button_ai {
-        display: inline-block;
-        padding: 12px 24px;
-        width: 50%;
-        font-size: 14px;
-        font-weight: 600;
-        text-align: center;
-        text-decoration: none;
-        color: #fff;
-        background-color: #007BFF;
-        border-radius: 4px;
-        border: none;
-        transition: all 0.3s ease 0s;
-        cursor: pointer;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-    }
-
-    .button_ai:hover {
-        background-color: #0056b3;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-    }
-
-    .button_ai:active {
-        background-color: #004085;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-    }
-</style>
-<div class="home-description" style="margin-top: 40px;">
-    <a th:href="@{/m/m_summarize}"><div class="button_ai">AI 문서 요약 서비스</div></a>
-    <a th:href="@{/m/m_humun_food}"><div class="button_ai" style="margin-top: 10px;">후문
-        음식점 정보 보기</div></a>
+<div class="list-title">
+    <h1><a th:href="@{/m/m_campusmap_detail}">상세 정보</a></h1>
 </div>
+<div class="list-container">
+    <ul>
+        <h3>목록</h3>
+        <li><a th:href="@{//m/m_campusmap}">캠퍼스맵</a></li>
+        <li><a th:href="@{//m/m_campusmap_detail}">상세 정보</a></li>
+    </ul>
+</div>
+<div class="main-container">
+    <div class="content-container">
+        <div class="main-container">
+            <div class="info-bus">
+                <div class="direction" style="width: 310px;">
+                    <h1 style="text-decoration: skyblue wavy underline; font-family: 'Noto Sans KR', sans-serif; font-size: 20pt;">학생들이 많이 찾는 것!</h1>
+                    <h3 style="font-size: 13pt;">1. 장근청홀</h3>
+                    <a>- 백주년 기념관 3층</a>
+                    <h3 style="font-size: 13pt;">2. 다목적관(=보건복지교육관)</h3>
+                    <a>- 만나의집, 기숙사 사이 건물 1층짜리</a>
+                    <h3 style="font-size: 13pt;">3. 홍명기홀</h3>
+                    <a>- 다니엘관 지하 1층</a>
+                    <h3 style="font-size: 13pt;">4. 프린트는 도서관 or 바울관 지하 현대문구 추천</h3>
+                    <h3 style="font-size: 13pt;">5. 바울관 1층에서 각종 증명서 무인으로 발급 가능!</h3>
+                    <h3 style="font-size: 13pt;">6. 보조배터리는 배터리몬 어플 깔아서 다니엘관 1층, 바울관 1층, 엠카페 쪽에서 대여 및 반납 가능함.</h3>
+                    <a>- 학생회비 납부한 사람은 납부 확인(수윙스 납부확인서) 안경점 옆 학생회실에서 무료 대여 가능함!</a>
+                    <h3 style="font-size: 13pt;">7. 교내 가게 + 후문 일부 가게에서 수페이 사용 가능 (ex. 스마일하우 등)</h3>
+                    <h3 style="font-size: 13pt;">8. 후문 gs25, 후문 CU는 24시 영업</h3>
+                    <a>- 방학 기간 단축영업 : 00-06시 미영업</a>
+                    <br><br><br>
+                    <a style="float: right; font-size:10pt;">모든 정보는 23년도 기준이며<br> 추가로 제보할 내용이 있으면&nbsp;</a><br><br><a style="float: right; font-size:10pt;">에 제보 바랍니다.</a><a style="color: black; text-decoration: black underline; float: right; font-size:11pt;">콩들의 소리</a>
+                    <a href="https://everytime.kr/384376/v/296575382" style="float: right; font-size:10pt; text-decoration: black underline;" target="_blank">https://everytime.kr/384376/v/296575382</a><a style="float: right; font-size:10pt;">출처 :&nbsp;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <button class="fixed-button" id="openSlider"></button>
 
 <!-- 슬라이드인 메뉴 -->
