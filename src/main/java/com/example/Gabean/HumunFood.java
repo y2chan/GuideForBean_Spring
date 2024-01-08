@@ -12,7 +12,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
 @Entity
-@Table(name = "gabean_humunfood")
+@Table(name = "GaBean_humunfood")
 public class HumunFood {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,7 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 import java.util.Date;
 
 @Entity
-@Table(name = "gabean_post") // 데이터베이스 테이블 이름을 지정합니다.
+@Table(name = "GaBean_post") // 데이터베이스 테이블 이름을 지정합니다.
 public class Post {
 
     @Id

@@ -5,7 +5,7 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "gabean_openinghours")
+@Table(name = "GaBean_openinghours")
 public class OpeningHours {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
