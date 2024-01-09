@@ -35,16 +35,16 @@ public class ShuttleTimetable {
 
     public static Map<String, String[]> getSeasonalWeekdayTimetable() {
         Map<String, String[]> timetable = new HashMap<>();
-        timetable.put("화랑대 -> 학교", new String[]{"08:00", "08:10", "09:10", "10:10", "11:10", "12:10", "13:10", "14:10", "15:10", "16:10", "17:10"});
-        timetable.put("학교 -> 화랑대", new String[]{"08:30", "08:40", "09:30" , "10:30", "11:30", "12:30", "13:30", "14:30", "15:30", "16:30"});
+        timetable.put("화랑대 -> 학교", new String[]{"08:30", "08:40", "09:30" , "10:30", "11:30", "12:30", "13:30", "14:30", "15:30", "16:30"});
+        timetable.put("학교 -> 화랑대", new String[]{"08:00", "08:10", "09:10", "10:10", "11:10", "12:10", "13:10", "14:10", "15:10", "16:10", "17:10"});
         // 나머지 노선 시간표를 추가할 수 있습니다.
         return timetable;
     }
 
     public static Map<String, String[]> getSeasonalFridayTimetable() {
         Map<String, String[]> timetable = new HashMap<>();
-        timetable.put("화랑대 -> 학교", new String[]{"08:00", "08:10", "09:10", "10:10", "11:10", "12:10", "13:10", "14:10"});
-        timetable.put("학교 -> 화랑대", new String[]{"08:30", "08:40", "09:30" , "10:30", "11:30", "12:30", "13:30", "14:30"});
+        timetable.put("화랑대 -> 학교", new String[]{"08:30", "08:40", "09:30" , "10:30", "11:30", "12:30", "13:30", "14:30"});
+        timetable.put("학교 -> 화랑대", new String[]{"08:00", "08:10", "09:10", "10:10", "11:10", "12:10", "13:10", "14:10"});
         // 나머지 노선 시간표를 추가할 수 있습니다.
         return timetable;
     }
